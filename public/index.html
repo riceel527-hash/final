@@ -1,43 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+import React from 'react';
+import './style.css'; // Optional if style.css is used alongside inline/styled layout
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+export default function ApiSearchDashboard() {
+  const goHome = () => {
+    // Add home navigation logic here
+  };
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  const scrollToContact = () => {
+    // Add contact scroll/navigation logic here
+  };
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-</html>
+  return (
+    <div className="main-container">
+      <nav className="navbar">
+        <div className="nav-links">
+          <button className="nav-btn" onClick={goHome} type="button">
+            Home
+          </button>
+          <button className="nav-btn" onClick={scrollToContact} type="button">
+            Contact
+          </button>
+        </div>
+      </nav>
+
+      <img
+        className="banner-image"
+        src="Benefits-of-APIs.png"
+        alt="Benefits of APIs"
+      />
+
+      <div className="content-area">
+        <h2>Team Contributors</h2>
+        <div className="user-cards-container" id="userCards">
+          {/* User cards rendered dynamically */}
+        </div>
+
+        <h2>Search & Filter Posts</h2>
+        <div className="filter-container">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by title..."
+          />
+          <input
+            type="number"
+            id="idInput"
+            placeholder="User or Post ID..."
+          />
+          <select id="sortOrder" defaultValue="none">
+            <option value="none">Sort: Default</option>
+            <option value="az">Alphabetical (A-Z)</option>
+            <option value="za">Alphabetical (Z-A)</option>
+          </select>
+        </div>
+
+        <div id="loadingContainer" className="loading-container">
+          <div className="spinner"></div>
+          <p>Loading Dashboard Assets...</p>
+        </div>
+
+        <ul id="results"></ul>
+
+        <footer>
+          <p>&copy; 2026 API Search Dashboard. Powered by JSONPlaceholder.</p>
+        </footer>
+      </div>
+    </div>
+  );
+}
