@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
+import Benefits-of-APIs.png '../assets/Benefits-of-APIs.png';
+
 
 export default function App() {
   // 1. Data & Async State
