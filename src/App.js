@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import Benefits-of-APIs.png '../assets/Benefits-of-APIs.png';
-
+import BenefitsOfAPIs from "./assets/Benefits-of-APIs.png";
 
 export default function App() {
   // 1. Data & Async State
@@ -88,108 +87,68 @@ export default function App() {
     }
   };
 
+  const goHome = () => {
+    // Add home navigation logic here
+  };
+
+  const scrollToContact = () => {
+    // Add contact scroll/navigation logic here
+  };
+
   return (
-    <div className="dashboard-container">
-      {/* Header / Nav Controls */}
-      <header className="navbar">
-        <button onClick={handleGoHome}>Home</button>
-        <button onClick={handleScrollToContact}>Contact</button>
-      </header>
-
-      {/* Filter & Search Bar Controls */}
-      <section className="controls">
-        <input
-          type="text"
-          placeholder="Search titles..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Filter by User or Post ID..."
-          value={selectedId}
-          onChange={(e) => setSelectedId(e.target.value)}
-        />
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-        >
-          <option value="none">Sort: Default</option>
-          <option value="az">Alphabetical (A-Z)</option>
-          <option value="za">Alphabetical (Z-A)</option>
-        </select>
-      </section>
-
-      {/* Loading & Error Indicators */}
-      {isLoading && (
-        <div id="loadingContainer">
-          <p>Loading dashboard data...</p>
+    <div className="main-container">
+      <nav className="navbar">
+        <div className="nav-links">
+          <button className="nav-btn" onClick={goHome} type="button">
+            Home
+          </button>
+          <button className="nav-btn" onClick={scrollToContact} type="button">
+            Contact
+          </button>
         </div>
-      )}
+      </nav>
 
-      {error && (
-        <div id="errorContainer">
-          <p
-            style={{
-              color: "#ef4444",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            {error}
-          </p>
+      <img
+        className="banner-image"
+        src={BenefitsOfAPIs}
+        alt="Benefits of APIs"
+      />
+
+      <div className="content-area">
+        <h2>Team Contributors</h2>
+
+        <div className="user-cards-container" id="userCards">
+          {users.map((user) => (
+            <div key={user.id}>{user.name}</div>
+          ))}
         </div>
-      )}
+        <h2>Search & Filter Posts</h2>
+        <div className="filter-container">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search by title..."
+          />
+          <input type="number" id="idInput" placeholder="User or Post ID..." />
+          <select id="sortOrder" defaultValue="none">
+            <option value="none">Sort: Default</option>
+            <option value="az">Alphabetical (A-Z)</option>
+            <option value="za">Alphabetical (Z-A)</option>
+          </select>
+        </div>
 
-      {/* Main Dashboard Content */}
-      {!isLoading && !error && (
-        <main>
-          {/* User Cards Section */}
-          <section id="userCards" className="user-cards-grid">
-            {users.map((user) => (
-              <div
-                key={user.id}
-                className="user-card"
-                onClick={() => handleSelectUser(user.id)}
-                style={{ cursor: "pointer" }}
-              >
-                <h3>ID: {user.id}</h3>
-                <strong>{user.name}</strong>
-                <p>@{user.username}</p>
-                <p style={{ color: "#0066cc", marginTop: "4px" }}>
-                  {user.email}
-                </p>
-                <p
-                  style={{
-                    color: "#475569",
-                    fontSize: "10px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  {user.phone}
-                </p>
-              </div>
-            ))}
-          </section>
+        {isLoading && (
+          <div className="loading-container">
+            <div className="spinner"></div>
+            <p>Loading Dashboard Assets...</p>
+          </div>
+        )}
+        <ul id="results"></ul>
 
-          {/* Results List Section */}
-          <ul id="results" className="results-list">
-            {filteredAndSortedPosts.map((item) => (
-              <li key={item.id}>
-                <span className="id-badge">
-                  User ID: {item.userId} | Post ID: {item.id}
-                </span>
-                <br />
-                <strong>{item.title}</strong>
-              </li>
-            ))}
-          </ul>
-        </main>
-      )}
-
-      <footer>
-        <p>Dashboard Contact Info & Footer</p>
-      </footer>
+        <footer>
+          <p>&copy; 2026 API Search Dashboard. Powered by JSONPlaceholder.</p>
+        </footer>
+      </div>
     </div>
   );
 }
