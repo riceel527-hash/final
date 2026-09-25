@@ -111,7 +111,7 @@ export default function App() {
         />
       </div>
 
-      {*/ Results Section */}
+      {/* Results Section */}
       <div className="search-results">
         {filteredResults.length > 0 ? (
           filteredResults.map((item) => (
@@ -165,18 +165,7 @@ export default function App() {
 
         {isLoading && (
           <div className="loading-container">
-            <div className="spinner"></div>
+            <div className="spinner">
             <p>Loading Dashboard Assets...</p>
           </div>
-        )}
-        <ul id="results"></ul>
-
-        <footer>
-          <p>&copy; 2026 API Search Dashboard. Powered by JSONPlaceholder.</p>
-        </footer>
-      </div>
-    </div>
-  );
-}
-
-
+        
