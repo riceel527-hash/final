@@ -95,8 +95,35 @@ export default function App() {
     // Add contact scroll/navigation logic here
   };
 
+
   return (
-    <div className="main-container">
+    <div className="search-page-container">
+      <h2>Search Dashboard</h2>
+
+      {/* Search Input */}
+      <div className="search-bar">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search by title..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      {*/ Results Section */}
+      <div className="search-results">
+        {filteredResults.length > 0 ? (
+          filteredResults.map((item) => (
+            <div key={item.id} className="result-card">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+              </div>
+          ))
+        ) : (
+          <p>No results found matching "{searchTerm}"</p>
+        )}
+      </div>
       <nav className="navbar">
         <div className="nav-links">
           <button className="nav-btn" onClick={goHome} type="button">
@@ -106,8 +133,7 @@ export default function App() {
             Contact
           </button>
         </div>
-      </nav>
-
+      
       <img
         className="banner-image"
         src={BenefitsOfAPIs}
@@ -152,3 +178,5 @@ export default function App() {
     </div>
   );
 }
+
+
