@@ -30,6 +30,35 @@ export default function App() {
         const postsData = await postsResponse.json();
         const usersData = await usersResponse.json();
 
+        // TODO: Create user cards from API data
+       // const userCards = usersData.map((user) => (
+       //   <div key={user.id}>
+       //     <h3>{user.name}</h3>
+       //     <p>{user.email}</p>
+       //   </div>
+       // ));
+
+     function displayUserCards(users) {
+     const container = document.getElementById("userCards");
+      if (!container) return;
+
+     container.innerHTML = users
+    .map(
+      (user) => `
+        <div class="user-card" onclick="selectUser(${user.id})" style="cursor: pointer;">
+            <h3>ID: ${user.id}</h3>
+            <strong>${user.name}</strong>
+            <p>@${user.username}</p>
+            <p style="color: #0066cc; margin-top: 4px;">${user.email}</p>
+            <p style="color: #475569; font-size: 10px; font-style: italic;">${user.phone}</p>
+        </div>
+    `,
+    )
+    .join("");
+}
+
+
+
         setPosts(postsData);
         setUsers(usersData);
         setError(null);
@@ -95,35 +124,8 @@ export default function App() {
     // Add contact scroll/navigation logic here
   };
 
-
   return (
     <div className="search-page-container">
-      <h2>Search Dashboard</h2>
-
-      {/* Search Input */}
-      <div className="search-bar">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search by title..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </div>
-
-      {/* Results Section */}
-      <div className="search-results">
-        {filteredResults.length > 0 ? (
-          filteredResults.map((item) => (
-            <div key={item.id} className="result-card">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              </div>
-          ))
-        ) : (
-          <p>No results found matching "{searchTerm}"</p>
-        )}
-      </div>
       <nav className="navbar">
         <div className="nav-links">
           <button className="nav-btn" onClick={goHome} type="button">
@@ -133,7 +135,8 @@ export default function App() {
             Contact
           </button>
         </div>
-      
+      </nav>
+
       <img
         className="banner-image"
         src={BenefitsOfAPIs}
@@ -154,18 +157,51 @@ export default function App() {
             type="text"
             id="searchInput"
             placeholder="Search by title..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
           />
-          <input type="number" id="idInput" placeholder="User or Post ID..." />
-          <select id="sortOrder" defaultValue="none">
+          <input
+            type="number"
+            id="idInput"
+            placeholder="User or Post ID..."
+            value={selectedId}
+            onChange={(event) => setSelectedId(event.target.value)}
+          />
+          <select
+            id="sortOrder"
+            value={sortOrder}
+            onChange={(event) => setSortOrder(event.target.value)}
+          >
             <option value="none">Sort: Default</option>
             <option value="az">Alphabetical (A-Z)</option>
             <option value="za">Alphabetical (Z-A)</option>
           </select>
         </div>
 
+        {error && <p role="alert">{error}</p>}
+
         {isLoading && (
           <div className="loading-container">
-            <div className="spinner">
+            <div className="spinner"></div>
             <p>Loading Dashboard Assets...</p>
           </div>
-        
+        )}
+
+        {!isLoading && !error && (
+          <div className="search-results">
+            {filteredAndSortedPosts.length > 0 ? (
+              filteredAndSortedPosts.map((item) => (
+                <div key={item.id} className="result-card">
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
+                </div>
+              ))
+            ) : (
+              <p>No results found matching "{searchTerm}"</p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
