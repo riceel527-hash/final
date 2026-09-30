@@ -30,35 +30,6 @@ export default function App() {
         const postsData = await postsResponse.json();
         const usersData = await usersResponse.json();
 
-        // TODO: Create user cards from API data
-       // const userCards = usersData.map((user) => (
-       //   <div key={user.id}>
-       //     <h3>{user.name}</h3>
-       //     <p>{user.email}</p>
-       //   </div>
-       // ));
-
-     function displayUserCards(users) {
-     const container = document.getElementById("userCards");
-      if (!container) return;
-
-     container.innerHTML = users
-    .map(
-      (user) => `
-        <div class="user-card" onclick="selectUser(${user.id})" style="cursor: pointer;">
-            <h3>ID: ${user.id}</h3>
-            <strong>${user.name}</strong>
-            <p>@${user.username}</p>
-            <p style="color: #0066cc; margin-top: 4px;">${user.email}</p>
-            <p style="color: #475569; font-size: 10px; font-style: italic;">${user.phone}</p>
-        </div>
-    `,
-    )
-    .join("");
-}
-
-
-
         setPosts(postsData);
         setUsers(usersData);
         setError(null);
@@ -147,9 +118,28 @@ export default function App() {
         <h2>Team Contributors</h2>
 
         <div className="user-cards-container" id="userCards">
-          {users.map((user) => (
-            <div key={user.id}>{user.name}</div>
-          ))}
+        {users.map((user) => (
+          <div
+            key={user.id}
+            className="user-card"
+            onClick={() => setSelectedId(user.id)}
+            style={{ cursor: "pointer" }}
+          >
+            <h3>ID: {user.id}</h3>
+            <strong>{user.name}</strong>
+            <p>@{user.username}</p>
+            <p style={{ color: "#0066cc", marginTop: "4px" }}>{user.email}</p>
+            <p
+              style={{
+                color: "#475569",
+                fontSize: "10px",
+                fontStyle: "italic",
+              }}
+            >
+              {user.phone}
+            </p>
+          </div>
+        ))}
         </div>
         <h2>Search & Filter Posts</h2>
         <div className="filter-container">
