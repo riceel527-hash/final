@@ -80,19 +80,14 @@ export default function App() {
     setSortOrder("none");
   };
 
-  const handleScrollToContact = () => {
-    const footerElement = document.querySelector("footer");
-    if (footerElement) {
-      footerElement.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const goHome = () => {
-    // Add home navigation logic here
+    handleGoHome();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const scrollToContact = () => {
-    // Add contact scroll/navigation logic here
+    window.location.href =
+      "mailto:info@example.com?subject=Information Request";
   };
 
   return (
@@ -118,28 +113,28 @@ export default function App() {
         <h2>Team Contributors</h2>
 
         <div className="user-cards-container" id="userCards">
-        {users.map((user) => (
-          <div
-            key={user.id}
-            className="user-card"
-            onClick={() => setSelectedId(user.id)}
-            style={{ cursor: "pointer" }}
-          >
-            <h3>ID: {user.id}</h3>
-            <strong>{user.name}</strong>
-            <p>@{user.username}</p>
-            <p style={{ color: "#0066cc", marginTop: "4px" }}>{user.email}</p>
-            <p
-              style={{
-                color: "#475569",
-                fontSize: "10px",
-                fontStyle: "italic",
-              }}
+          {users.map((user) => (
+            <div
+              key={user.id}
+              className="user-card"
+              onClick={() => handleSelectUser(user.id)}
+              style={{ cursor: "pointer" }}
             >
-              {user.phone}
-            </p>
-          </div>
-        ))}
+              <h3>ID: {user.id}</h3>
+              <strong>{user.name}</strong>
+              <p>@{user.username}</p>
+              <p style={{ color: "#0066cc", marginTop: "4px" }}>{user.email}</p>
+              <p
+                style={{
+                  color: "#475569",
+                  fontSize: "10px",
+                  fontStyle: "italic",
+                }}
+              >
+                {user.phone}
+              </p>
+            </div>
+          ))}
         </div>
         <h2>Search & Filter Posts</h2>
         <div className="filter-container">
@@ -195,3 +190,9 @@ export default function App() {
     </div>
   );
 }
+<footer className="footer">
+  <p>
+    &copy; {new Date().getFullYear()}API Search Dashboard. Powered by
+    JSONPlaceholder
+  </p>
+</footer>;

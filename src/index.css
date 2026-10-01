@@ -134,6 +134,14 @@ footer {
          }
 }
 
+.footer{
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: auto;
+    color: #666;
+    font-size: 0.9rem;
+    border-top: 1px solid #eee;
+}
 
 
 
