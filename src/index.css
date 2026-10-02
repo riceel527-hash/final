@@ -143,5 +143,28 @@ footer {
     border-top: 1px solid #eee;
 }
 
+/* ==========================================
+   Back to Top Floating Button
+   ========================================== */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #0066cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 1000;
+}
 
+.back-to-top-btn:hover {
+  background-color: #004b99;
+  transform: translateY(-2px);
+}
 

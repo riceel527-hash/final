@@ -187,12 +187,22 @@ export default function App() {
           </div>
         )}
       </div>
+
+      <button
+        className="back-to-top-btn"
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        type="button"
+        aria-label="Back to top"
+      >
+        ↑ Back to Top
+      </button>
+
+      <footer className="footer">
+        <p>
+          &copy; {new Date().getFullYear()} API Search Dashboard. Powered by
+          JSONPlaceholder.
+        </p>
+      </footer>
     </div>
   );
 }
-<footer className="footer">
-  <p>
-    &copy; {new Date().getFullYear()}API Search Dashboard. Powered by
-    JSONPlaceholder
-  </p>
-</footer>;
